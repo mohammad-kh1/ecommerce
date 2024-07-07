@@ -10,7 +10,7 @@
                             @foreach($categories as $category)
                             <li wire:key="{{$category->id}}" class="mb-4">
                                 <label for="{{$category->slug}}" class="flex items-center dark:text-gray-400">
-                                    <input id="{{$category->slug}}" type="checkbox" value="{{$category->id}}" class="w-4 h-4 mr-2">
+                                    <input id="{{$category->slug}}" wire:model.live="selected_categories" type="checkbox" value="{{$category->id}}" class="w-4 h-4 mr-2">
                                     <span class="text-lg">{{  $category->name }}</span>
                                 </label>
                             </li>
@@ -25,7 +25,7 @@
                             @foreach($brands as $brand)
                                 <li wire:key="{{$brand->id}}" class="mb-4">
                                     <label for="{{$brand->slug}}" class="flex items-center dark:text-gray-400">
-                                        <input id="{{$brand->slug}}" type="checkbox" value="{{$brand->id}}" class="w-4 h-4 mr-2">
+                                        <input id="{{$brand->slug}}" wire:model.live="selected_brands" type="checkbox" value="{{$brand->id}}" class="w-4 h-4 mr-2">
                                         <span class="text-lg">{{  $brand->name }}</span>
                                     </label>
                                 </li>
@@ -37,14 +37,14 @@
                         <div class="w-16 pb-2 mb-6 border-b border-rose-600 dark:border-gray-400"></div>
                         <ul>
                             <li class="mb-4">
-                                <label for="" class="flex items-center dark:text-gray-300">
-                                    <input type="checkbox" class="w-4 h-4 mr-2">
-                                    <span class="text-lg dark:text-gray-400">In Stock</span>
+                                <label for="featured" class="flex items-center dark:text-gray-300">
+                                    <input type="checkbox" id="featured" wire:model.live="featured" value="1" " class="w-4 h-4 mr-2">
+                                    <span class="text-lg dark:text-gray-400">Is Featured</span>
                                 </label>
                             </li>
                             <li class="mb-4">
-                                <label for="" class="flex items-center dark:text-gray-300">
-                                    <input type="checkbox" class="w-4 h-4 mr-2">
+                                <label for="onsale" class="flex items-center dark:text-gray-300">
+                                    <input type="checkbox" id="onsale" wire:model.live="onsale" class="w-4 h-4 mr-2">
                                     <span class="text-lg dark:text-gray-400">On Sale</span>
                                 </label>
                             </li>
@@ -55,10 +55,11 @@
                         <h2 class="text-2xl font-bold dark:text-gray-400">Price</h2>
                         <div class="w-16 pb-2 mb-6 border-b border-rose-600 dark:border-gray-400"></div>
                         <div>
-                            <input type="range" class="w-full h-1 mb-4 bg-blue-100 rounded appearance-none cursor-pointer" max="500000" value="100000" step="100000">
+                            <div>{{\Illuminate\Support\Number::currency($price_range,"USD")}}</div>
+                            <input type="range" wire:model.live="price_range" class="w-full h-1 mb-4 bg-blue-100 rounded appearance-none cursor-pointer" max="500000" value="300000" step="1000">
                             <div class="flex justify-between ">
-                                <span class="inline-block text-lg font-bold text-blue-400 ">&#8377; 1000</span>
-                                <span class="inline-block text-lg font-bold text-blue-400 ">&#8377; 500000</span>
+                                <span class="inline-block text-lg font-bold text-blue-400 ">{{\Illuminate\Support\Number::currency(1000,"USD")}}</span>
+                                <span class="inline-block text-lg font-bold text-blue-400 ">{{\Illuminate\Support\Number::currency(500000,"USD")}}</span>
                             </div>
                         </div>
                     </div>
@@ -81,7 +82,7 @@
                             <div class="border border-gray-300 dark:border-gray-700">
                                 <div class="relative bg-gray-200">
                                     <a wire:navigate href="/products/{{$product->slug}}" class="">
-                                        <img src="{{url("storage" , $product->images[0])}}" alt="" class="object-cover w-full h-56 mx-auto ">
+                                        <img src="{{url("storage" , $product->images[0] ?? null)}}" alt="" class="object-cover w-full h-56 mx-auto ">
                                     </a>
                                 </div>
                                 <div class="p-3 ">
