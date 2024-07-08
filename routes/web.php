@@ -9,10 +9,13 @@ Route::get('/products/{slug}' , \App\Livewire\ProductDetailPage::class);
 Route::get('/cart' , \App\Livewire\CartPage::class);
 
 
-Route::get('/login' , \App\Livewire\Auth\Login::class)->name("login");
-Route::get('/register' , \App\Livewire\Auth\Register::class);
-Route::get('/forget-password' , \App\Livewire\Auth\ForgetPassword::class);
-Route::get('/reset-password' , \App\Livewire\Auth\ResetPassword::class);
+Route::middleware("guest")->group(function(){
+    Route::get('/login' , \App\Livewire\Auth\Login::class)->name("login");
+    Route::get('/register' , \App\Livewire\Auth\Register::class);
+    Route::get('/forgot-password' , \App\Livewire\Auth\ForgetPassword::class)->name("password.request");
+    Route::get('/reset/{token}' , \App\Livewire\Auth\ResetPassword::class)->name("password.reset");
+});
+
 
 
 
