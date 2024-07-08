@@ -7,3 +7,12 @@
 git clone https://github.com/mohammad-kh1/ecommerce
 cd ecommerce
 ```
+```shell
+compoer install
+npm install
+
+php artisan migrate
+
+npm run dev
+php artisan serve
+```
