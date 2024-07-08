@@ -22,9 +22,9 @@ Route::middleware("guest")->group(function(){
 Route::middleware("auth")->group(function(){
     Route::get('/checkout' , \App\Livewire\CheckoutPage::class);
     Route::get('/my-orders' , \App\Livewire\MyOrdersPage::class);
-    Route::get('/my-orders/{order}' , \App\Livewire\MyOrderDetailPage::class);
-    Route::get("/success" , \App\Livewire\SuccessPage::class);
-    Route::get("/cancel" , \App\Livewire\CancelPage::class);
+    Route::get('/my-orders/{order}' , \App\Livewire\MyOrderDetailPage::class)->name("my-orders.show");
+    Route::get("/success" , \App\Livewire\SuccessPage::class)->name("success");
+    Route::get("/cancel" , \App\Livewire\CancelPage::class)->name("cancel");
     Route::get("/logout",function(){
         auth()->logout();
         return to_route("home");
