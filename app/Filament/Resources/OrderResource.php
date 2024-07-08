@@ -51,13 +51,13 @@ class OrderResource extends Resource
                             "processing" => "Processing",
                             "shipped" => "Shipped",
                             "delivered" => "Delivered",
-                            "cancelled" => "Cancelled"
+                            "canceled" => "Cancelled"
                         ])->inline()->default("new")->required()->colors([
                             "new" => "info",
                             "processing" => "warning",
                             "shipped" => "success",
                             "delivered" => "success",
-                            "cancelled" => "danger"
+                            "canceled" => "danger"
                         ])->icons([
                             "new" => "heroicon-m-sparkles",
                             "processing" => "heroicon-m-arrow-path",
@@ -150,7 +150,7 @@ class OrderResource extends Resource
                     "processing" => "Processing",
                     "shipped" => "Shipped",
                     "delivered" => "Delivered",
-                    "cancelled" => "Cancelled"
+                    "canceled" => "Cancelled"
                 ])->searchable()->sortable(),
 
             ])

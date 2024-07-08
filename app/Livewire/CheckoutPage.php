@@ -3,7 +3,7 @@
 namespace App\Livewire;
 
 use App\Helpers\CartManagement;
-use App\Mail\OrderPlaced;
+use App\Jobs\SendOrderEmail;
 use App\Models\Address;
 use App\Models\Order;
 use Illuminate\Support\Facades\Mail;
@@ -93,7 +93,7 @@ class CheckoutPage extends Component
         $address->save();
         $order->items()->createMany($cart_items);
         CartManagement::clearCartItemsFormCookie();
-        Mail::to(request()->user())->send(new OrderPlaced($order));
+        SendOrderEmail::dispatch($order);
         return redirect($redirect_url);
     }
 
